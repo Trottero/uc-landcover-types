@@ -1,0 +1,6 @@
+data/cloudy/*
+data/cloudy-removed/*
+data/eurosat/*
+data/pristine-cloudless/*
+
+!.gitkeep

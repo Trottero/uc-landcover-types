@@ -8,8 +8,12 @@ numpy = "*"
 pandas = "*"
 matplotlib = "*"
 seaborn = "*"
+tensorflow = "*"
+tensorflow-datasets = "*"
 
 [dev-packages]
+autopep8 = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.9"
