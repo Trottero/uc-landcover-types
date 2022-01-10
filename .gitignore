@@ -4,5 +4,6 @@ data/eurosat/*
 data/pristine-cloudless/*
 resnet-50/
 training-logs/
+.vscode/
 
 !.gitkeep
