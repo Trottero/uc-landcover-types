@@ -11,6 +11,9 @@ seaborn = "*"
 tensorflow = "*"
 tensorflow-datasets = "*"
 tensorboard = "*"
+tifffile = "*"
+black = "*"
+scipy = "*"
 
 [dev-packages]
 autopep8 = "*"
