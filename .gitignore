@@ -2,5 +2,7 @@ data/cloudy/*
 data/cloudy-removed/*
 data/eurosat/*
 data/pristine-cloudless/*
+resnet-50/
+training-logs/
 
 !.gitkeep
