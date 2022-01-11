@@ -10,6 +10,14 @@ import scipy.signal as scisig
 from matplotlib import pyplot as plt
 from tools.feature_detectors import get_cloud_cloudshadow_mask
 
+DATA_TYPES = {
+    1: 's1',
+    2: 's2',
+    3: 's2_cloudy',
+}
+
+DATA_PATH = 'ROIs1868_summer'
+
 
 def make_dir(dir_path):
     if os.path.isdir(dir_path):
@@ -350,8 +358,10 @@ class DataGenerator(keras.utils.Sequence):
         return image.astype('float32')
 
     def get_data_image(self, ID, data_type, paramx, paramy):
+        main_id = ID.split('_')[0]
+        type = f'{DATA_PATH}_{DATA_TYPES[data_type]}'
 
-        data_path = os.path.join(self.input_data_folder, ID[data_type], ID[4]).lstrip()
+        data_path = os.path.join(self.input_data_folder, type, f'{DATA_TYPES[data_type]}_{main_id}', f'{type}_{ID}').lstrip()
 
         if data_type == 2 or data_type == 3:
             data_image = self.get_opt_image(data_path, paramx, paramy)

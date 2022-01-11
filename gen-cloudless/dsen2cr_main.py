@@ -12,6 +12,7 @@ from dsen2cr_tools import train_dsen2cr, predict_dsen2cr
 from keras.optimizers import Nadam
 from keras.utils import multi_gpu_model
 from tools.dataIO import get_train_val_test_filelists
+from data import get_train_val_test_split
 
 K.set_image_data_format("channels_first")
 
@@ -88,10 +89,10 @@ def run_dsen2cr(predict_file=None, resume_file=None):
 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup training %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    dataset_list_filepath = "../Data/datasetfilelist.csv"
+    dataset_list_filepath = "./gen-cloudless/datasetfilelist.csv"
 
-    base_out_path = "/path/to/output/model_runs/"
-    input_data_folder = "/path/to/dataset/parent/folder"
+    base_out_path = "gen-cloudless/out/"
+    input_data_folder = "gen-cloudless/data/"
 
     # training parameters
     initial_epoch = 0  # start at epoch number
@@ -189,9 +190,10 @@ def run_dsen2cr(predict_file=None, resume_file=None):
     print("Model compiled successfully!")
 
     print("Getting file lists")
-    train_filelist, val_filelist, test_filelist = get_train_val_test_filelists(
-        dataset_list_filepath
-    )
+    # train_filelist, val_filelist, test_filelist = get_train_val_test_filelists(
+    #     dataset_list_filepath
+    # )
+    train_filelist, val_filelist, test_filelist = get_train_val_test_split()
 
     print("Number of train files found: ", len(train_filelist))
     print("Number of validation files found: ", len(val_filelist))
