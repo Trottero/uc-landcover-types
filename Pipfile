@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "*"
+numpy = "1.19.5"
 pandas = "*"
 matplotlib = "*"
 seaborn = "*"
-tensorflow = "*"
+tensorflow-gpu="1.15.0" 
+keras="2.2.4"
 tensorflow-datasets = "*"
 tifffile = "*"
 scipy = "*"
@@ -21,4 +22,4 @@ autopep8 = "*"
 ipykernel = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.7"

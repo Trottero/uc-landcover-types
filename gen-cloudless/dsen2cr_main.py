@@ -3,6 +3,7 @@ from __future__ import division
 import argparse
 import random
 
+from tensorflow.python.client import device_lib
 import keras.backend as K
 import numpy as np
 import tensorflow as tf

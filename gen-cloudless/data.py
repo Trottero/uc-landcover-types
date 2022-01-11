@@ -27,11 +27,11 @@ def get_file_ids():
     return files
 
 
-def get_train_val_test_split(train_size=0.8):
+def get_train_val_test_split(train_size=0.8, seed=42):
     file_ids = list(get_file_ids())
 
-    train_ids, temp_ids = train_test_split(file_ids, train_size=train_size)
-    val_ids, test_ids = train_test_split(temp_ids, train_size=.5)
+    train_ids, temp_ids = train_test_split(file_ids, train_size=train_size, random_state=seed)
+    val_ids, test_ids = train_test_split(temp_ids, train_size=.5, random_state=seed)
 
     return train_ids, val_ids, test_ids
 
