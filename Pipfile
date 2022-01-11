@@ -16,8 +16,6 @@ scipy = "*"
 pydot = "*"
 scikit-learn = "*"
 jinja2 = "*"
-
-[dev-packages]
 autopep8 = "*"
 ipykernel = "*"
 
