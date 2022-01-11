@@ -13,7 +13,6 @@ tensorflow-datasets = "*"
 tensorboard = "*"
 tifffile = "*"
 scipy = "*"
-rasterio = "*"
 pydot = "*"
 scikit-learn = "*"
 
