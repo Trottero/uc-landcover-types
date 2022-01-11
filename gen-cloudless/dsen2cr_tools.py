@@ -2,10 +2,10 @@ import csv
 import os
 from random import shuffle
 
-from dataIO import make_dir, DataGenerator, process_predicted
-from keras.callbacks import ModelCheckpoint, CSVLogger
-from keras.utils import plot_model
-from myCallbacks import CSV_NBatchLogger, NBatchLogger, TensorBoardWrapper
+from tools.dataIO import make_dir, DataGenerator, process_predicted
+from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger
+from tensorflow.keras.utils import plot_model
+from tools.myCallbacks import CSV_NBatchLogger, NBatchLogger, TensorBoardWrapper
 
 
 def train_dsen2cr(
@@ -40,18 +40,19 @@ def train_dsen2cr(
 
     print("Training model name: {}".format(model_name))
 
-    out_path_train = make_dir(os.path.join(base_out_path, model_name, "/"))
+    out_path_t = os.path.join(base_out_path, model_name, "")
+    out_path_train = make_dir(out_path_t)
 
     # generate model information and metadata
-    plot_model(
-        model,
-        to_file=os.path.join(out_path_train, model_name + "model.png"),
-        show_shapes=True,
-        show_layer_names=True,
-    )
-    model_yaml = model.to_yaml()
-    with open(out_path_train + model_name + "model.yaml", "w") as yaml_file:
-        yaml_file.write(model_yaml)
+    # plot_model(
+    #     model,
+    #     to_file=os.path.join(out_path_train, model_name + "model.png"),
+    #     show_shapes=True,
+    #     show_layer_names=True,
+    # )
+    model_json = model.to_json()
+    with open(out_path_train + model_name + "model.json", "w") as json_file:
+        json_file.write(model_json)
     print("Model information files created at ", out_path_train)
 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Initialize callbacks %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -173,8 +174,8 @@ def train_dsen2cr(
         print("Will resume from the weights in file {}".format(resume_file))
         model.load_model(resume_file)
 
-    model.fit_generator(
-        generator=training_generator,
+    model.fit(
+        training_generator,
         validation_data=validation_generator,
         epochs=epochs_nr,
         verbose=1,
@@ -251,7 +252,7 @@ def predict_dsen2cr(
             # process predicted image
             process_predicted(
                 predicted,
-                predict_filelist[i * batch_size : i * batch_size + batch_size],
+                predict_filelist[i * batch_size: i * batch_size + batch_size],
                 predicted_images_path,
                 scale,
                 cloud_threshold,

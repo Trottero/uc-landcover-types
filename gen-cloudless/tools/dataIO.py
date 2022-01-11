@@ -2,7 +2,8 @@ import csv
 import os
 import os.path
 
-import keras
+import tensorflow as tf
+from tensorflow import keras
 import matplotlib
 import numpy as np
 import rasterio
@@ -386,7 +387,7 @@ class DataGenerator(keras.utils.Sequence):
                                               self.clip_max[data_type - 1][channel])
                 data_image[channel] -= self.clip_min[data_type - 1][channel]
                 data_image[channel] = self.max_val * (data_image[channel] / (
-                        self.clip_max[data_type - 1][channel] - self.clip_min[data_type - 1][channel]))
+                    self.clip_max[data_type - 1][channel] - self.clip_min[data_type - 1][channel]))
             if shift_data:
                 data_image -= self.max_val / 2
         # OPT
@@ -424,11 +425,11 @@ class DataGenerator(keras.utils.Sequence):
             if data_type == 3 and self.use_cloud_mask:
                 cloud_mask = get_cloud_cloudshadow_mask(data_image, self.cloud_threshold)
                 cloud_mask[cloud_mask != 0] = 1
-                cloud_mask_batch[i,] = cloud_mask
+                cloud_mask_batch[i, ] = cloud_mask
 
             data_image = self.get_normalized_data(data_image, data_type)
 
-            batch[i,] = data_image
+            batch[i, ] = data_image
 
         cloud_mask_batch = cloud_mask_batch[:, np.newaxis, :, :]
 

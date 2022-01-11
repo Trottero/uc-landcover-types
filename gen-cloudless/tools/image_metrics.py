@@ -42,8 +42,8 @@ def get_sam(y_true, y_predict):
     """Computes the SAM array."""
     mat = tf.multiply(y_true, y_predict)
     mat = tf.reduce_sum(mat, 1)
-    mat = tf.div(mat, K.sqrt(tf.reduce_sum(tf.multiply(y_true, y_true), 1)))
-    mat = tf.div(mat, K.sqrt(tf.reduce_sum(tf.multiply(y_predict, y_predict), 1)))
+    mat = tf.math.divide(mat, K.sqrt(tf.reduce_sum(tf.multiply(y_true, y_true), 1)))
+    mat = tf.math.divide(mat, K.sqrt(tf.reduce_sum(tf.multiply(y_predict, y_predict), 1)))
     mat = tf.acos(K.clip(mat, -1, 1))
 
     return mat

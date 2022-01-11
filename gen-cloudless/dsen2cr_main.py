@@ -9,8 +9,8 @@ import tensorflow as tf
 import tools.image_metrics as img_met
 from dsen2cr_network import DSen2CR_model
 from dsen2cr_tools import train_dsen2cr, predict_dsen2cr
-from keras.optimizers import Nadam
-from keras.utils import multi_gpu_model
+from tensorflow.keras.optimizers import Nadam
+from tensorflow.python.keras.utils.multi_gpu_utils import multi_gpu_model
 from tools.dataIO import get_train_val_test_filelists
 from data import get_train_val_test_split
 
@@ -144,7 +144,7 @@ def run_dsen2cr(predict_file=None, resume_file=None):
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Initialize session %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     # Configure Tensorflow session
-    config = tf.ConfigProto()
+    config = tf.compat.v1.ConfigProto()
     # Don't pre-allocate memory; allocate as-needed
     config.gpu_options.allow_growth = True
 
@@ -152,13 +152,13 @@ def run_dsen2cr(predict_file=None, resume_file=None):
     # config.gpu_options.per_process_gpu_memory_fraction = 0.3
 
     # Create a session with the above options specified.
-    K.tensorflow_backend.set_session(tf.Session(config=config))
+    # K.tensorflow_backend.set_session(tf.Session(config=config))
 
     # Set random seeds for repeatability
     random_seed_general = 42
     random.seed(random_seed_general)  # random package
     np.random.seed(random_seed_general)  # numpy package
-    tf.set_random_seed(random_seed_general)  # tensorflow
+    tf.random.set_seed(random_seed_general)  # tensorflow
 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Initialize model %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
