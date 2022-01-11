@@ -4,22 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "1.19.5"
-pandas = "*"
+tensorflow-gpu = "==1.15.0"
+keras = "==2.2.4"
 matplotlib = "*"
-seaborn = "*"
-tensorflow-gpu="1.15.0" 
-keras="2.2.4"
-tensorflow-datasets = "*"
-tifffile = "*"
+numpy = "==1.19.5"
 scipy = "*"
+h5py = "<3.0.0"
+mkl = "*"
+nose = "*"
 rasterio = "*"
 pydot = "*"
+ipykernel = "*"
 scikit-learn = "*"
+tqdm = "*"
+tifffile = "*"
 
 [dev-packages]
-autopep8 = "*"
-ipykernel = "*"
 
 [requires]
 python_version = "3.7"

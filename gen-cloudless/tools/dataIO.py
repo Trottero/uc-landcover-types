@@ -58,11 +58,11 @@ def get_train_val_test_filelists(listpath):
 
 
 def get_info_quartet(ID, predicted_images_path, input_data_folder):
-    scene_name = ID[4]
-    filepath_sar = os.path.join(input_data_folder, ID[1], ID[4]).lstrip()
-    filepath_cloudFree = os.path.join(input_data_folder, ID[2], ID[4]).lstrip()
-    filepath_cloudy = os.path.join(input_data_folder, ID[3], ID[4]).lstrip()
-
+    scene_name = f'{DATA_PATH}_{DATA_TYPES[1]}_{ID}'
+    main_id = ID.split('_')[0]
+    filepath_sar = os.path.join(input_data_folder, f'{DATA_PATH}_{DATA_TYPES[1]}', f'{DATA_TYPES[1]}_{main_id}', f'{DATA_PATH}_{DATA_TYPES[1]}_{ID}').lstrip()
+    filepath_cloudFree = os.path.join(input_data_folder, f'{DATA_PATH}_{DATA_TYPES[2]}', f'{DATA_TYPES[2]}_{main_id}', f'{DATA_PATH}_{DATA_TYPES[2]}_{ID}').lstrip()
+    filepath_cloudy = os.path.join(input_data_folder, f'{DATA_PATH}_{DATA_TYPES[3]}', f'{DATA_TYPES[3]}_{main_id}', f'{DATA_PATH}_{DATA_TYPES[3]}_{ID}').lstrip()
     return scene_name[:-4], filepath_sar, filepath_cloudFree, filepath_cloudy
 
 
@@ -171,7 +171,8 @@ def save_single_cloudmap(image, out_path, name):
     norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
 
     plt.figure()
-    plt.imshow(image, cmap=cmap, norm=norm, vmin=-1, vmax=1)
+    # plt.imshow(image, cmap=cmap, norm=norm, vmin=-1, vmax=1)
+    plt.imshow(image, cmap=cmap, norm=norm)
 
     cb = plt.colorbar(aspect=40, pad=0.01)
     cb.ax.yaxis.set_tick_params(pad=0.9, length=2)
@@ -360,7 +361,6 @@ class DataGenerator(keras.utils.Sequence):
     def get_data_image(self, ID, data_type, paramx, paramy):
         main_id = ID.split('_')[0]
         type = f'{DATA_PATH}_{DATA_TYPES[data_type]}'
-
         data_path = os.path.join(self.input_data_folder, type, f'{DATA_TYPES[data_type]}_{main_id}', f'{type}_{ID}').lstrip()
 
         if data_type == 2 or data_type == 3:

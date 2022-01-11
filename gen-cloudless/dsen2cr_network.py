@@ -58,6 +58,7 @@ def DSen2CR_model(
     # Add first layer (long skip connection)
     x = Add()([x, input_opt])
 
+    shape_n = None
     if use_cloud_mask:
         # the hacky trick with global variables and with lambda functions is needed to avoid errors when
         # pickle saving the model. Tensors are not pickable.
