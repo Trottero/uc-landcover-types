@@ -12,8 +12,10 @@ tensorflow = "*"
 tensorflow-datasets = "*"
 tensorboard = "*"
 tifffile = "*"
-black = "*"
 scipy = "*"
+rasterio = "*"
+pydot = "*"
+scikit-learn = "*"
 
 [dev-packages]
 autopep8 = "*"
