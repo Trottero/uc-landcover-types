@@ -18,3 +18,9 @@ For `Cloudy` and `Pristine-cloudless` we will be using de data from [here](https
 -   `ROIs1868_summer_s2.tar.gz`
 
 For the eurosat dataset which is used to train our classifier [here](https://github.com/phelber/eurosat) it is included in tensorflow, see [here](https://www.tensorflow.org/datasets/catalog/eurosat)
+
+# Running the code
+
+Code can be ran using the notebooks in classification or using the scripts in gen-cloudless.
+
+Some of the code requires tensorflow 1.x, for which a seperate branch is used!
